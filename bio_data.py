@@ -1,0 +1,6 @@
+print("Welcome to NDI Application System")
+name= input("FullNAME")
+age= input("Age")
+sex= input("sex")
+school= input("school")
+print(f"THANK YOU FOR APPLYING WE HAVE TAKING NOTE THAT YOUR NAME CONTAIN THE FOLLOWING {name} {age} {sex} {school}")
