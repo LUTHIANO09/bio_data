@@ -1,0 +1,8 @@
+print("Welcome To Oil Field Data Processing System")
+report= input("Kindly enter your report: ")
+rep=(report.lower())
+print(rep)
+repo=(report.replace("-",":"))
+print(repo)
+split = repo.split(",")
+print(split)
