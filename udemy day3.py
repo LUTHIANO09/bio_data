@@ -23,6 +23,7 @@ if height >= 120:
         print("please Pay $5")
     elif age <= 18:
         print("please pay $7.5")
-    elif age >18:
-    print("pleas pay $12.5 ")
-
+    elif age > 18:
+        print("pleas pay $12.5 ")
+else:
+    print("sorry!! you are \"NOT\" eligible to ride the rollercoaster")
