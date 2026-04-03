@@ -1,5 +1,13 @@
 print("Welcome To Oil Field Data Processing System")
 report= input("Kindly enter your report: ")
+price_per_barrel= float(input("price per barrel: $"))
+barr= input("quantity of barrel: ")
+total_price_of_barrel= int(price_per_barrel)*int(barr)
+total_price= total_price_of_barrel
+print(f"Total ${total_price}")
+company_name= input("Enter company name: ")
+length_com= len(company_name)
+print(length_com < 10 )
 rep=(report.lower())
 print(rep)
 repo=(report.replace("-",":"))
