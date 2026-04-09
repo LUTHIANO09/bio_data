@@ -1,4 +1,4 @@
-from bio_data.bio_data import name
+
 
 # rig_ops.py
 # NDI Phase 2 — Rig Operations Data System
@@ -103,17 +103,22 @@ print(well_profile.keys())
 print(well_profile.values())
 
 for x in wells:
-    if x == "active":
+    if x ["active"]== False:
         continue
-    print(False)
+#
+# pressure= wells set"pressure"
+# temp= wells["temp"]
 
+# status_1 = "CRITICAL"
+# status_2 = "LOW PRESSURE"
+# status_3= 'HIGH TEMP'
+# status_4= 'NORMAL'
 
-
-status_1 = "CRITICAL"
-status_2 = "LOW PRESSURE"
-status_3= 'HIGH TEMP'
-status_4= 'NORMAL'
-
-for x in wells:
-    if name < 1000:
-        print(x)
+if pressure < 1000:
+    status = 'CRITICAL'
+elif pressure < 2500:
+    status = 'LOW PRESSURE'
+elif temp > 280:
+    status = 'HIGH TEMP'
+else:
+    status = 'NORMAL'
