@@ -102,23 +102,37 @@ for x in well_profile.keys():
 print(well_profile.keys())
 print(well_profile.values())
 
-for x in wells:
-    if x ["active"]== False:
+#TASK 5 Loop + conditionals
+
+active_alert=0
+critical_count=0
+for well in wells:
+    if well ["active"]== False:
         continue
-#
-# pressure= wells set"pressure"
-# temp= wells["temp"]
+    pressure = well["pressure"]
+    temp = well["temp"]
+    if pressure < 1000:
+        status = 'CRITICAL'
+    elif pressure < 2500:
+        status = 'LOW PRESSURE'
+    elif temp > 280:
+        status = 'HIGH TEMP'
+    else:
+        status = 'NORMAL'
+    if status in ["CRITICAL" or "HIGH TEMP"]:
+        active_alerts.add(status)
+    if status == "CRITICAL":
+        critical_count = critical_count + 1
+    active_alert = active_alert + 1
+    print(well["name"], "|", pressure ,"psi" , "|", status, "| Engineer:",well["engineer"] )
+    if status in ["CRITICAL" or "HIGH TEMP"]:
+        print(well)
 
-# status_1 = "CRITICAL"
-# status_2 = "LOW PRESSURE"
-# status_3= 'HIGH TEMP'
-# status_4= 'NORMAL'
+#Task 6
+print("DAILY OPERATION REPORT AS AT 8TH APRIL 2026")
+print(f"'─' * 45”")
+total_well = len(wells)
+total_active_wells= len(active_alerts)
+active_well_classification= len(active_alerts)/total_active_wells
 
-if pressure < 1000:
-    status = 'CRITICAL'
-elif pressure < 2500:
-    status = 'LOW PRESSURE'
-elif temp > 280:
-    status = 'HIGH TEMP'
-else:
-    status = 'NORMAL'
+
