@@ -135,4 +135,4 @@ total_well = len(wells)
 total_active_wells= len(active_alerts)
 active_well_classification= len(active_alerts)/total_active_wells
 
-
+print(f"The total Active well is {total_active_wells} , the list of well on critical is {total_well}")
