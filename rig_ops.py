@@ -105,6 +105,7 @@ print(well_profile.values())
 #TASK 5 Loop + conditionals
 
 active_alert=0
+status= ""
 critical_count=0
 for well in wells:
     if well ["active"]== False:
@@ -126,13 +127,15 @@ for well in wells:
     active_alert = active_alert + 1
     print(well["name"], "|", pressure ,"psi" , "|", status, "| Engineer:",well["engineer"] )
     if status in ["CRITICAL" or "HIGH TEMP"]:
-        print(well)
+        print(f"Total active well={critical_count}")
+        print(f"active alert= {active_alert}")
+        print(f"Total critical count {critical_count}")
 
 #Task 6
 print("DAILY OPERATION REPORT AS AT 8TH APRIL 2026")
-print(f"'─' * 45”")
-total_well = len(wells)
-total_active_wells= len(active_alerts)
-active_well_classification= len(active_alerts)/total_active_wells
-
-print(f"The total Active well is {total_active_wells} , the list of well on critical is {total_well}")
+# print(f"'─' * 45”")
+# total_well = len(wells)
+# total_active_wells= len(active_alerts)
+# active_well_classification= len(active_alerts)/total_active_wells
+#
+# print(f"The total Active well is {total_active_wells} , the list of well on critical is {total_well}")
