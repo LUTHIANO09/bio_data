@@ -12,13 +12,14 @@
 
 #A1
 
-def greet_engineer(name):
+def greet_engineer(name="Engineer"):
     print(f"Good morning,{name}! are you ready to monitor the rig?")
     # print("good morning" + name ,"" + "are you ready to monitor the rig?")
 
 greet_engineer("Emeka")
 greet_engineer("Rukewe")
-greet_engineer("Bashir"),
+greet_engineer("Bashir")
+greet_engineer()
 
 #A2
 
@@ -147,6 +148,7 @@ def pressure_monitor():
         operator = input("Enter pressure reading (or 0 to quit): ")
         pressure = int(operator)
         if pressure == 0:
+            print("pressure reading stopped")
             break
         status = classify_pressure(pressure)
         print("Status: ", status)
@@ -168,10 +170,14 @@ def run_daily_check(wells):
     for well in wells:
         if well["pressure"] == 0:
             continue
-
         maintenance_due(45)
         print(f"{well} Maintenance: {maintenance_due(45)}")
 
 print(run_daily_check("wells"))
 
-print(f"{total_critical} {count_critical(total_critical)} {maintenance_due(70)}")
+def summarise_wells(wells):
+    print(f"The total well checked {check_all_wells("well")} "
+        f"{count_critical("well")} are in CRITICAL status and also"
+        f" {maintenance_due(60)} for maintenance")
+
+print(summarise_wells("wells"))
