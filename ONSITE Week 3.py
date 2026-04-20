@@ -66,7 +66,7 @@ print(takes_two(3,7))
 
 # NO 12
 def sub_two(x,y):
-    return x-y
+    return y-x
 print(sub_two(15,4))
 
 # NO 13
@@ -185,5 +185,3 @@ def product_of_2(x,y,z):
 print(product_of_2(10,6,3))
 
 #NO 29
-def la_num(x,y,z):
-
