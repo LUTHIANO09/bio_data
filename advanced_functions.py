@@ -1,7 +1,6 @@
 import time
 
-from bio_data.rig_ops import pressure
-
+#
 # #Task 1  ARGUMENTS  (Positional, Keyword & Default)
 # def well_report(well_name, pressure, status='Active', location='offshore', ):
 #     print(well_name, pressure, status, location)
@@ -20,104 +19,104 @@ from bio_data.rig_ops import pressure
 #TASK 2  ·  *args  AND  **kwargs
 
 #2A
-#
-# def log_pressures(*readings):
-#     lst = []
-#     for reading in readings:
-#         lst.append(reading)
-#         print(f"'Reading{lst}'psi'")
-#     print(f"The highest Reading is {max(lst)}")
-#
-# log_pressures(2100,3850,4600)
-# log_pressures(4100,3850,6600,7800,9100,3300)
+
+def log_pressures(*readings):
+    lst = []
+    for reading in readings:
+        lst.append(reading)
+        print(f"'Reading{lst}'psi'")
+    print(f"The highest Reading is {max(lst)}")
+
+log_pressures(2100,3850,4600)
+log_pressures(4100,3850,6600,7800,9100,3300)
 
 #Task 2B **kwargs
 
-# def create_well_profile(**well_details):
-#     for key,value in well_details.items():
-#         print(key, ":", value)
-#
-#
-# create_well_profile(name="Bonga-01",status='Under Review',location='Onshore')
-# create_well_profile(name="Bonga-02",status='Under Review',location='Onshore', north='sokoto' '' ,state='taraba')
+def create_well_profile(**well_details):
+    for key,value in well_details.items():
+        print(key, ":", value)
+
+
+create_well_profile(name="Bonga-01",status='Under Review',location='Onshore')
+create_well_profile(name="Bonga-02",status='Under Review',location='Onshore', north='sokoto' '' ,state='taraba')
 
 #Task 2C
-#
-# def rig_summary(rig_name, *wells, **stats):
-#     print(rig_name)
-#     print(list(wells))
-#     print(stats)
-#
-# rig_summary(
-#     'Bonga Field',
-#     'Bonga-01', 'Bonga-03', 'Bonga-07',
-#     total_output=12400, uptime_pct=94.2, crew_count=47
-# )
+
+def rig_summary(rig_name, *wells, **stats):
+    print(rig_name)
+    print(list(wells))
+    print(stats)
+
+rig_summary(
+    'Bonga Field',
+    'Bonga-01', 'Bonga-03', 'Bonga-07',
+    total_output=12400, uptime_pct=94.2, crew_count=47
+)
 
 #Task 3 SCOPE  (Local, Global & Nonlocal)
-# rig_status = 'Operational'
-# def show_status():
-#     print(rig_status)
-#
-# def update_status(new_status):
-#     global rig_status
-#     rig_status = new_status
-#
-# show_status()
-# update_status("shutdown")
-# show_status()
+rig_status = 'Operational'
+def show_status():
+    print(rig_status)
+
+def update_status(new_status):
+    global rig_status
+    rig_status = new_status
+
+show_status()
+update_status("shutdown")
+show_status()
 
 #Task 3b Nonlocal
 #
-# def pressure_tracker():
-#     current_max=0
-#     def update_max(reading):
-#         nonlocal current_max
-#         if reading  > current_max:
-#             current_max = reading
-#     update_max(3200)
-#     update_max(4800)
-#     update_max(1500)
-#     print(f'Peak pressure recorded: {current_max} psi')
-#
-# pressure_tracker()
+def pressure_tracker():
+    current_max=0
+    def update_max(reading):
+        nonlocal current_max
+        if reading  > current_max:
+            current_max = reading
+    update_max(3200)
+    update_max(4800)
+    update_max(1500)
+    print(f'Peak pressure recorded: {current_max} psi')
+
+pressure_tracker()
 
 #Task 4A  DECORATORS
 
-# def log_call(func):
-#     def wrapper(*args, **kwargs):
-#         print('Function started')
-#         result = func(*args, **kwargs)
-#         print('Function complete')
-#         return result
-#     return wrapper
-#
-# @log_call
-# def check_well(well_name):
-#     print(f'Checking: {well_name}')
-#
-# check_well('Bonga-01')
+def log_call(func):
+    def wrapper(*args, **kwargs):
+        print('Function started')
+        result = func(*args, **kwargs)
+        print('Function complete')
+        return result
+    return wrapper
+
+@log_call
+def check_well(well_name):
+    print(f'Checking: {well_name}')
+
+check_well('Bonga-01')
 
 
 
 #Task 4B Decorator with timing
 
-# def timer(func):
-#     def wrapper():
-#         before = time.time()
-#         func()
-#         after = time.time()
-#         print("Time:", after - before)
-#     return wrapper
-#
-# @timer
-# def run_pressure_scan():
-#     for i in range(1_000_000):
-#         pass
-#
-# run_pressure_scan()
+def timer(func):
+    def wrapper():
+        before = time.time()
+        func()
+        after = time.time()
+        print("Time:", after - before)
+    return wrapper
 
-#Task  5 LAMBDA  (Anonymous Functions)
+@timer
+def run_pressure_scan():
+    for i in range(1_000_000):
+        pass
+
+run_pressure_scan()
+
+# #Task  5 LAMBDA  (Anonymous Functions)
 
 psi_to_bar = lambda psi: psi*0.0689476
 
@@ -137,5 +136,83 @@ wells = [
 ]
 
 sorted_wells = sorted(wells, key=lambda w: ['pressure'], reverse=True)
+fill= list(filter(lambda w: w['pressure'] > 3000,wells))
+mapp= list(map(lambda w: (w['name'].upper(), w['pressure']), fill ))
 print(sorted_wells)
-#max(well['pressure'] for well in sorted_wells)
+print(max(well['pressure'] for well in sorted_wells))
+print(fill)
+print(mapp)
+
+#Task 6A RECURSION
+
+def re_countdown(n):
+    if n < 0:
+        print("You have the final count")
+    else:
+        print(n)
+        re_countdown(n-1)
+
+re_countdown(10)
+
+#Task 6B
+
+# def sum_readings(readings):
+#     if len(readings) == 0:
+#         return 0
+#     else:
+#         return readings[0] + sum_readings(readings[1:])
+#     # empty= [0]
+#     # readings= list(readings)
+#     # empty.extend(readings)
+#     # return sum(empty)
+#
+# test= [3850,820,4600,3200,650]
+# print(sum_readings(test))
+
+
+#Task 6C
+#
+# def find_deepest(wells, current_max=0):
+       #Base case
+#     if not wells:
+#         return current_max
+
+#     first_well = wells[0]
+#     if first_well['pressure'] > current_max:
+#         current_max = first_well['pressure']
+       #recursive case
+#     return find_deepest(wells[1:], current_max)
+#
+#
+# wells = [
+#     {'name': 'Bonga-01', 'pressure': 3850},
+#     {'name': 'Erha-02', 'pressure': 4600},
+#     {'name': 'Agbami-02', 'pressure': 650},
+#     {'name': 'Bonga-03', 'pressure': 820},
+#     ]
+#
+# print(find_deepest(wells))
+
+
+#Task 7  GENERATORS  AND  RANGE
+
+#Range 7A
+
+# for a in range(11):
+#     print(f'well-{a}')
+
+# Task 7B Generator
+
+# def pressure_feed(readings):
+#     for reading in readings:
+#         yield reading
+#         if reading > 4000:
+#             yield "CRITICAL"
+#         eli
+#         # also yield the status for this reading
+# feed = pressure_feed([3850, 820, 4600, 3200, 650])
+# #for item in feed:
+#  #print(item)
+
+# pressure_feed([3850, 820, 4600, 3200, 650])
+
