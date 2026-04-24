@@ -203,16 +203,66 @@ re_countdown(10)
 
 # Task 7B Generator
 
-# def pressure_feed(readings):
-#     for reading in readings:
-#         yield reading
-#         if reading > 4000:
-#             yield "CRITICAL"
-#         eli
-#         # also yield the status for this reading
-# feed = pressure_feed([3850, 820, 4600, 3200, 650])
-# #for item in feed:
-#  #print(item)
+def pressure_feed(readings):
+    for reading in readings:
+        yield reading
+        if reading <= 1000:
+            yield "CRITICAL"
+        elif reading <= 2500:
+            yield "Low"
+        elif reading <= 1500:
+            yield "Normal"
+        else:
+            yield "overpressure"
+        # also yield the status for this reading
+feed = pressure_feed([3850, 820, 4600, 3200, 650])
+for item in feed:
+ print(item)
 
-# pressure_feed([3850, 820, 4600, 3200, 650])
+pressure_feed([3850, 820, 4600, 3200, 650])
+
+#Task 7C
+
+def well_id_generator(prefix='Well'):
+    n = 1
+    while True:
+        yield f'{prefix}-{n:03d}'
+        n += 1
+
+gen = well_id_generator()
+# use next(gen) five times
+print(next(gen))
+print(next(gen))
+print(next(gen))
+print(next(gen))
+print(next(gen))
+
+#Task 8 Bringing it all together
+
+alert_threshold= 4000
+
+def audit_log(function_name):
+    print("AUDIT")
+@audit_log
+def classify_well(*readings, **metadata):
+    for reading in readings:
+        return reading / 2, metadata["name"]
+
+is_critical=  lambda reading: reading < alert_threshold
+
+
+def live_feed(wells):
+    wells = list(wells)
+    yield wells
+
+
+def count_active(wells):
+    wells = list(wells)
+    if "active" in wells:
+        print(wells)
+        print(True)
+        return wells.count("active")
+    else:
+        return "not available"
+
 
