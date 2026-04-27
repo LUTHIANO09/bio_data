@@ -1,9 +1,9 @@
 import time
-
+# #
 #
 # #Task 1  ARGUMENTS  (Positional, Keyword & Default)
 # def well_report(well_name, pressure, status='Active', location='offshore', ):
-#     print(well_name, pressure, status, location)
+#     print(f"Your well name is {well_name} and pressure is {pressure} and status is {status}")
 # #call 1 - positional only (use all defaults)
 # well_report("Bonga-01",3850)
 # # Call 2 — override status with keyword argument
@@ -14,18 +14,19 @@ import time
 #
 # # Call 4 — all keyword arguments, no positional order
 # well_report(pressure=820, well_name='Bonga-03', location='Deep Water')
-
-
-#TASK 2  ·  *args  AND  **kwargs
-
+#
+#
+# #TASK 2  ·  *args  AND  **kwargs
+#
 #2A
 
 def log_pressures(*readings):
-    lst = []
+    index = 0
     for reading in readings:
-        lst.append(reading)
-        print(f"'Reading{lst}'psi'")
-    print(f"The highest Reading is {max(lst)}")
+        index += 1
+
+        print(f"'Reading {index}: {reading} 'psi'")
+    print(f"The highest Reading is {max(readings)}")
 
 log_pressures(2100,3850,4600)
 log_pressures(4100,3850,6600,7800,9100,3300)
@@ -52,7 +53,7 @@ rig_summary(
     'Bonga-01', 'Bonga-03', 'Bonga-07',
     total_output=12400, uptime_pct=94.2, crew_count=47
 )
-
+#
 #Task 3 SCOPE  (Local, Global & Nonlocal)
 rig_status = 'Operational'
 def show_status():
@@ -67,20 +68,21 @@ update_status("shutdown")
 show_status()
 
 #Task 3b Nonlocal
-#
+#rig_status ="operational"
 def pressure_tracker():
     current_max=0
     def update_max(reading):
         nonlocal current_max
         if reading  > current_max:
             current_max = reading
+            print(current_max)
     update_max(3200)
     update_max(4800)
     update_max(1500)
     print(f'Peak pressure recorded: {current_max} psi')
 
 pressure_tracker()
-
+#
 #Task 4A  DECORATORS
 
 def log_call(func):
@@ -96,9 +98,9 @@ def check_well(well_name):
     print(f'Checking: {well_name}')
 
 check_well('Bonga-01')
-
-
-
+#
+#
+#
 #Task 4B Decorator with timing
 
 def timer(func):
@@ -156,50 +158,62 @@ re_countdown(10)
 
 #Task 6B
 
-# def sum_readings(readings):
-#     if len(readings) == 0:
-#         return 0
-#     else:
-#         return readings[0] + sum_readings(readings[1:])
-#     # empty= [0]
-#     # readings= list(readings)
-#     # empty.extend(readings)
-#     # return sum(empty)
-#
-# test= [3850,820,4600,3200,650]
-# print(sum_readings(test))
+def sum_readings(readings):
+    if len(readings) == 0:
+        return 0
+    else:
+        return readings[0] + sum_readings(readings[1:])
+    # empty= [0]
+    # readings= list(readings)
+    # empty.extend(readings)
+    # return sum(empty)
+
+test= [3850,820,4600,3200,650]
+print(sum_readings(test))
 
 
 #Task 6C
-#
-# def find_deepest(wells, current_max=0):
+
+def find_deepest(wells, current_max=0):
        #Base case
-#     if not wells:
-#         return current_max
+    if not wells:
+        return current_max
 
-#     first_well = wells[0]
-#     if first_well['pressure'] > current_max:
-#         current_max = first_well['pressure']
+    first_well = wells[0]
+    if first_well['pressure'] > current_max:
+        current_max = first_well['pressure']
        #recursive case
-#     return find_deepest(wells[1:], current_max)
-#
-#
-# wells = [
-#     {'name': 'Bonga-01', 'pressure': 3850},
-#     {'name': 'Erha-02', 'pressure': 4600},
-#     {'name': 'Agbami-02', 'pressure': 650},
-#     {'name': 'Bonga-03', 'pressure': 820},
-#     ]
-#
-# print(find_deepest(wells))
+    return find_deepest(wells[1:], current_max)
 
 
-#Task 7  GENERATORS  AND  RANGE
+wells = [
+    {'name': 'Bonga-01', 'pressure': 3850},
+    {'name': 'Erha-02', 'pressure': 4600},
+    {'name': 'Agbami-02', 'pressure': 650},
+    {'name': 'Bonga-03', 'pressure': 820},
+    ]
 
-#Range 7A
+print(find_deepest(wells))
 
-# for a in range(11):
-#     print(f'well-{a}')
+
+# Task 7  GENERATORS  AND  RANGE
+
+# Range 7A
+
+for a in range(11):
+    print(f'well-{a}')
+
+for even in range(2,11,2):
+    print(f'well-{even}')
+
+for reverse in range(10,0,-1):
+    print(f'rig shutdown in {reverse}')
+    if reverse < 1:
+        print('shutdown Completely')
+
+
+
+
 
 # Task 7B Generator
 
@@ -238,31 +252,98 @@ print(next(gen))
 print(next(gen))
 
 #Task 8 Bringing it all together
+#
+# alert_threshold= 4000
+#
+# def audit_log(function_name):
+#     def wrapper(*args, **kwargs):
+#         print("AUDIT")
+#
+# @audit_log
+# def classify_well(*readings, **metadata):
+#     avg = sum(readings) / len(readings)
+#     well_name= metadata.get("name")
+#     return avg, well_name
+#
+#
+#
+#
+#
+# is_critical=  lambda reading: reading < 1000
+#
+#
+# def live_feed(wells):
+#     wells = list(wells)
+#     yield wells
+#
+#
+# def count_active(wells):
+#     wells = list(wells)
+#     if "active" in wells:
+#         print(wells)
+#         print(True)
+#         return wells.count("active")
+#     else:
+#         return "not available"
 
-alert_threshold= 4000
 
-def audit_log(function_name):
-    print("AUDIT")
+ALERT_THRESHOLD = 4000
+
+
+# Decorator
+def audit_log(func):
+    def wrapper(*args, **kwargs):
+        print(f"AUDIT: {func.__name__} called")
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+# Function
 @audit_log
 def classify_well(*readings, **metadata):
-    for reading in readings:
-        return reading / 2, metadata["name"]
+    avg = sum(readings) / len(readings)
+    well_name = metadata.get("name", "Unknown")
+    return avg, well_name
 
-is_critical=  lambda reading: reading < alert_threshold
+
+# Lambda
+is_critical = lambda reading: reading < 1000
 
 
+# Generator
 def live_feed(wells):
-    wells = list(wells)
-    yield wells
+    for well in wells:
+        yield well
 
 
+# Recursion
 def count_active(wells):
-    wells = list(wells)
-    if "active" in wells:
-        print(wells)
-        print(True)
-        return wells.count("active")
-    else:
-        return "not available"
+    if not wells:
+        return 0
+
+    first = wells[0]
+    rest = wells[1:]
+
+    return (1 if first.get("active") else 0) + count_active(rest)
 
 
+# MAIN PROGRAM
+wells_data = [
+    {"name": "Bonga-01", "pressure": 3800, "active": True},
+    {"name": "Bonga-02", "pressure": 900, "active": False},
+    {"name": "Bonga-03", "pressure": 4200, "active": True},
+]
+
+for day in range(1, 5):
+    print(f"\n--- Day {day} ---")
+
+    for well in live_feed(wells_data):
+        avg, name = classify_well(well["pressure"], name=well["name"])
+
+        critical = is_critical(well["pressure"])
+        alert = well["pressure"] > ALERT_THRESHOLD
+
+        print(f"{name} | Avg: {avg} | Critical: {critical} | Above Threshold: {alert}")
+
+print("\nActive wells:", count_active(wells_data))
