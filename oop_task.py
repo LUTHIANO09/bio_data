@@ -396,12 +396,12 @@ run_inspection(mxd)
 #list of 4 differnt well
 
 # Create objects
-off1 = OffshoreWell("Bonga-01", 3000, 200, 900, "FPSO")
-on1  = Onshore("Ajaokuta-02", 2500, 180, "basin", "Ibrahim")
-sub1 = SubseaWell("DeepBlue-01", 800, 150, 2000, "FPSO", 120)
-off2 = OffshoreWell("Agbami-03", 600, 220, 1700, "Fixed Jacket")
-
-# Put them in ONE list
-welli = [off1, on1, sub1, off2]
-
-json.dumps()
+# off1 = OffshoreWell("Bonga-01", 3000, 200, 900, "FPSO")
+# on1  = Onshore("Ajaokuta-02", 2500, 180, "basin", "Ibrahim")
+# sub1 = SubseaWell("DeepBlue-01", 800, 150, 2000, "FPSO", 120)
+# off2 = OffshoreWell("Agbami-03", 600, 220, 1700, "Fixed Jacket")
+#
+# # Put them in ONE list
+# welli = [off1, on1, sub1, off2]
+#
+# json.dumps()
