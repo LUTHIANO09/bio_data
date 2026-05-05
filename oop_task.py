@@ -392,16 +392,29 @@ mxd.append(sub)
 run_inspection(mxd)
 
 # TASK 9  ·  BRING IT ALL TOGETHER
-
-#list of 4 differnt well
-
-# Create objects
-# off1 = OffshoreWell("Bonga-01", 3000, 200, 900, "FPSO")
-# on1  = Onshore("Ajaokuta-02", 2500, 180, "basin", "Ibrahim")
-# sub1 = SubseaWell("DeepBlue-01", 800, 150, 2000, "FPSO", 120)
-# off2 = OffshoreWell("Agbami-03", 600, 220, 1700, "Fixed Jacket")
 #
-# # Put them in ONE list
-# welli = [off1, on1, sub1, off2]
+# list of 4 differnt well
 #
-# json.dumps()
+# Create a list of objects
+lst5 = [
+    OffshoreWell("Bonga-01", 3000, 200, 900, "FPSO"),
+    Onshore("Ajaokuta-02", 2500, 180, "basin", "Ibrahim"),
+    SubseaWell("DeepBlue-01", 800, 150, 2000, "FPSO", 120),
+    OffshoreWell("Agbami-03", 600, 220, 1700, "Fixed Jacket"),
+]
+
+# Put them in ONE dictionary
+
+to_dict =[]
+
+for well in lst5:
+    to_dict.append({
+        "Name": well.name,
+        "Pressure": well.pressure,
+        "Temperature": well.temp,
+    })
+
+inspection_report_json = json.dumps(to_dict)
+
+print(inspection_report_json)
+
